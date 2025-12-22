@@ -18,13 +18,14 @@ jobs:
         with:
           python-version: "3.9"
 
-      - name: Install MLflow
-        run: pip install mlflow
+      - name: Install Dependencies
+        run: |
+          pip install mlflow pandas scikit-learn
 
-      - name: Run MLflow Project
+      - name: Run Training
         run: |
           cd MLProject
-          mlflow run .
+          python modelling.py
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
