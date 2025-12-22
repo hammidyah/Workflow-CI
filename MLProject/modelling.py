@@ -12,7 +12,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
 
 # Load dataset (local file in repo)
-df = pd.read_csv('titanic_dataset.csv')
+df = pd.read_csv('titanic_prepocessing.csv')
 
 # Basic preprocessing (tolerant to missing columns)
 df = df.drop(columns=["alive", "class", "embark_town"], errors='ignore')
