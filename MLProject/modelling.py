@@ -10,9 +10,11 @@ from sklearn.ensemble import RandomForestClassifier
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
+import os
 
 # Load dataset (local file in repo)
-df = pd.read_csv('titanic_preprocessing.csv')
+csv_path = os.path.join(os.path.dirname(__file__), 'titanic_preprocessing.csv')
+df = pd.read_csv(csv_path)
 
 # Basic preprocessing (tolerant to missing columns)
 df = df.drop(columns=["alive", "class", "embark_town"], errors='ignore')
