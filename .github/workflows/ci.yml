@@ -1,12 +1,14 @@
-name: MLflow CI
+name: CI Retrain Model
 
 on:
   push:
-    branches: [main]
-  workflow_dispatch:
+    paths:
+      - "**/*.py"
+      - "MLproject"
+      - "requirements.txt"
 
 jobs:
-  train:
+  retrain:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,19 +20,10 @@ jobs:
         with:
           python-version: "3.9"
 
-      - name: Install dependencies
+      - name: Install MLflow
         run: |
-          python -m pip install --upgrade pip
-          pip install mlflow pandas scikit-learn
+          pip install mlflow
 
-      - name: Run training
+      - name: Run MLflow Project
         run: |
-          cd MLProject
-          python modelling.py
-
-      - name: Upload artifacts
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: mlflow-artifacts
-          path: MLProject/mlruns
+          mlflow run .
